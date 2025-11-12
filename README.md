@@ -1,31 +1,24 @@
-`markdown
+
 nodejs-insta-private-api
 
-VERSION 3.3.1 Update library for latest Instagram Version
+VERSION 3.3.1 — Update library for latest Instagram version  
 A pure JavaScript Instagram Private API client written in CommonJS without TypeScript.
 
 Repository: Kunboruto20/nodejs-insta-private-api
 
+---
+
 Features
 
-Authentication - Username, email and password login with session management
-
-Direct Messages - Send text, images, and videos to users and groups
-
-Stories - React to stories, upload content, and view story feeds
-
-Feed Operations - Upload photos/videos, like, comment, and browse timeline
-
-Session Management - Save and restore login sessions
-
-Auto-retry - Built-in retry logic for failed requests
-
-Comprehensive API - 50+ methods covering most Instagram features
-
-High Performance - Optimized for speed and reliability
-
-Realtime MQTT - Real-time events via MQTT using edge-mqtt.facebook.com (GraphQL, Pub/Sub, Message Sync, Iris)
-
+- Authentication — Username, email and password login with session management
+- Direct Messages — Send text, images, and videos to users and groups
+- Stories — React to stories, upload content, and view story feeds
+- Feed Operations — Upload photos/videos, like, comment, and browse timeline
+- Session Management — Save and restore login sessions
+- Auto-retry — Built-in retry logic for failed requests
+- Comprehensive API — 50+ methods covering most Instagram features
+- High Performance — Optimized for speed and reliability
+- Realtime MQTT — Real-time events via MQTT using edge-mqtt.facebook.com (GraphQL, Pub/Sub, Message Sync, Iris)
 
 ---
 
@@ -39,7 +32,7 @@ npm install nodejs-insta-private-api
 
 Quick Start
 
-Basic Usage
+Basic usage
 
 `javascript
 const { IgApiClient } = require('nodejs-insta-private-api');
@@ -54,15 +47,14 @@ async function main() {
       email: 'your_email@example.com'
     });
 
-    console.log('Logged in successfully!');    
-    
-    await ig.dm.send({     
-      to: 'friend_username',     
-      message: 'Hello from the API!'     
-    });    
-    
-    console.log('Message sent!');
+    console.log('Logged in successfully!');
 
+    await ig.dm.send({
+      to: 'friend_username',
+      message: 'Hello from the API!'
+    });
+
+    console.log('Message sent!');
   } catch (error) {
     console.error('Error:', error.message);
   }
@@ -104,15 +96,11 @@ const igRealtime = withRealtime(new IgApiClient());
 
 RealtimeClient features
 
-Typing events
-
-Presence events
-
-Direct messaging
-
-Live comments
-
-Live events
+- Typing events
+- Presence events
+- Direct messaging
+- Live comments
+- Live events
 
 FbnsClient usage
 
@@ -136,46 +124,29 @@ ig.fbns.on('collapseKey', (data) => {
 
 Table of Contents
 
-Authentication
-
-Direct Messages
-
-Stories
-
-Feed Operations
-
-User Operations
-
-Media Operations
-
-Session Management
-
-Error Handling
-
-Advanced Usage
-
-API Reference
-
-Requirements
-
-Dependencies
-
-Contributing
-
-License
-
-Disclaimer
-
-Support
-
-Changelog
-
+- Authentication
+- Direct Messages
+- Stories
+- Feed Operations
+- User Operations
+- Media Operations
+- Session Management
+- Error Handling
+- Advanced Usage
+- API Reference
+- Requirements
+- Dependencies
+- Contributing
+- License
+- Disclaimer
+- Support
+- Changelog
 
 ---
 
 Authentication
 
-Basic Login
+Basic login
 
 `javascript
 const { IgApiClient } = require('nodejs-insta-private-api');
@@ -194,7 +165,7 @@ if (ig.isLoggedIn()) {
 }
 `
 
-Two-Factor Authentication
+Two-factor authentication
 
 `javascript
 try {
@@ -212,7 +183,7 @@ try {
 }
 `
 
-Session Management
+Session management
 
 `javascript
 const fs = require('fs');
@@ -237,7 +208,7 @@ if (await ig.isSessionValid()) {
 
 Direct Messages
 
-Send Text Messages
+Send text messages
 
 `javascript
 // Send to a single user
@@ -253,7 +224,7 @@ await ig.dm.send({
 });
 `
 
-Send to Groups
+Send to groups
 
 `javascript
 // Send to existing group by thread ID
@@ -274,7 +245,7 @@ await ig.dm.sendToGroup({
 });
 `
 
-Send Media
+Send media
 
 `javascript
 // Send image
@@ -290,7 +261,7 @@ await ig.dm.sendVideo({
 });
 `
 
-Manage Inbox
+Manage inbox
 
 `javascript
 // Get inbox
@@ -310,23 +281,23 @@ for (const item of thread.thread.items) {
 
 Stories
 
-React to Stories
+React to stories
 
 `javascript
-// React with emoji
+// React with text reaction
 await ig.story.react({
   storyId: 'storymediaid',
-  reaction: '❤️'
+  reaction: ':heart:'
 });
 
-// React with different emojis
+// React with different reaction
 await ig.story.react({
   storyId: 'storymediaid',
-  reaction: '🔥'
+  reaction: ':fire:'
 });
 `
 
-View Stories
+View stories
 
 `javascript
 // Get story feed (stories tray)
@@ -339,7 +310,7 @@ const userStories = await ig.story.getUser('user_id');
 await ig.story.seen(userStories.reel.items);
 `
 
-Upload Stories
+Upload stories
 
 `javascript
 // Upload photo story
@@ -356,7 +327,7 @@ await ig.story.uploadVideo({
 });
 `
 
-Story Highlights
+Story highlights
 
 `javascript
 // Get user's highlights
@@ -370,7 +341,7 @@ const highlight = await ig.story.getHighlight('highlight_id');
 
 Feed Operations
 
-Upload Posts
+Upload posts
 
 `javascript
 // Upload photo
@@ -389,7 +360,7 @@ await ig.feed.uploadVideo({
 });
 `
 
-Upload Carousel (Multiple Photos/Videos)
+Upload carousel (multiple photos/videos)
 
 `javascript
 await ig.feed.uploadCarousel({
@@ -402,7 +373,7 @@ await ig.feed.uploadCarousel({
 });
 `
 
-Browse Feeds
+Browse feeds
 
 `javascript
 // Get timeline feed
@@ -431,7 +402,7 @@ const savedPosts = await ig.feed.getSaved();
 
 User Operations
 
-User Information
+User information
 
 `javascript
 // Get user by username
@@ -444,7 +415,7 @@ const userById = await ig.user.info('user_id');
 const users = await ig.user.search('john');
 `
 
-Follow/Unfollow
+Follow / Unfollow
 
 `javascript
 // Follow user
@@ -464,7 +435,7 @@ const following = await ig.user.getFollowing('user_id');
 
 Media Operations
 
-Interact with Posts
+Interact with posts
 
 `javascript
 // Like a post
@@ -486,7 +457,7 @@ const likers = await ig.media.likers('media_id');
 const comments = await ig.media.comments('media_id');
 `
 
-Manage Your Posts
+Manage your posts
 
 `javascript
 // Edit post caption
@@ -503,7 +474,7 @@ await ig.media.deleteComment('mediaid', 'commentid');
 
 Error Handling
 
-Basic Error Handling
+Basic error handling
 
 `javascript
 const { IgApiClient } = require('nodejs-insta-private-api');
@@ -535,7 +506,7 @@ try {
 }
 `
 
-Retry Logic
+Retry logic
 
 `javascript
 const Utils = require('nodejs-insta-private-api/dist/utils');
@@ -550,7 +521,7 @@ await Utils.retryOperation(async () => {
 
 Advanced Usage
 
-Rate Limiting
+Rate limiting
 
 `javascript
 const Utils = require('nodejs-insta-private-api/dist/utils');
@@ -561,7 +532,7 @@ await Utils.randomDelay(1000, 3000); // Wait 1-3 seconds
 await ig.dm.send({ to: 'user2', message: 'Hello!' });
 `
 
-Batch Operations
+Batch operations
 
 `javascript
 // Send messages to multiple users with delays
@@ -573,7 +544,7 @@ for (const user of users) {
     await ig.dm.send({ to: user, message });
     console.log(Message sent to ${user});
 
-    // Wait between requests to avoid rate limiting    
+    // Wait between requests to avoid rate limiting
     await Utils.randomDelay(2000, 5000);
 
   } catch (error) {
@@ -582,7 +553,7 @@ for (const user of users) {
 }
 `
 
-File Validation
+File validation
 
 `javascript
 const Utils = require('nodejs-insta-private-api/dist/utils');
@@ -622,7 +593,7 @@ isSessionValid() - Check if session is valid
 destroy() - Cleanup resources
 `
 
-Realtime Methods
+Realtime methods
 
 `
 connectRealtime() - Connect to MQTT broker
@@ -648,7 +619,7 @@ ig.story - Story operations
 ig.feed - Feed operations
 `
 
-Convenient Access
+Convenient access
 
 `
 ig.dm - Shortcut for common DM operations
@@ -689,20 +660,16 @@ Contributing
 Repository: Kunboruto20/nodejs-insta-private-api
 
 1. Fork the repository
-
 2. Create your feature branch (git checkout -b feature/amazing-feature)
-
 3. Commit your changes (git commit -m 'Add some amazing feature')
-
 4. Push to the branch (git push origin feature/amazing-feature)
-
 5. Open a Pull Request
 
 ---
 
 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License — see the LICENSE file for details.
 
 ---
 
@@ -716,40 +683,32 @@ Support
 
 If you find this library useful, please consider:
 
-Starring the repository
-Reporting bugs
-Suggesting features
-Improving documentation
+- Starring the repository
+- Reporting bugs
+- Suggesting features
+- Improving documentation
 
 ---
 
 Changelog
 
-v4.7.0 - New Realtime MQTT System
+v4.7.0 — New Realtime MQTT System
 
-NEW! Complete realtime system rewrite using edge-mqtt.facebook.com
-
-Added Support for all Instagram realtime topics (GraphQL, Pub/Sub, Message Sync, Iris)
-
-Added Dedicated parsers for each message type
-
-Added Automatic reconnection with exponential backoff
-
-Added Comprehensive event system for all realtime activities
-
-Fixed All previous realtime implementation issues
-
-Updated Complete documentation for new realtime system
+- Complete realtime system rewrite using edge-mqtt.facebook.com
+- Added support for all Instagram realtime topics (GraphQL, Pub/Sub, Message Sync, Iris)
+- Added dedicated parsers for each message type
+- Added automatic reconnection with exponential backoff
+- Added comprehensive event system for all realtime activities
+- Fixed previous realtime implementation issues
+- Updated documentation for the new realtime system
 
 v1.0.0
 
-Initial release
-
-Full Instagram Private API implementation
-
-50+ methods covering all major features
-
-Comprehensive error handling
-
-Session management
+- Initial release
+- Full Instagram Private API implementation
+- 50+ methods covering all major features
+- Comprehensive error handling
+- Session management
 `
+
+Want me to commit this README with a version that includes a Quick Start variant using nodejs-instagram-private-api style (generateDevice, account.login, entity.directThread) as in your screenshot? I can add an additional Quick Start subsection without changing any of the existing lines, so you keep compatibility.
